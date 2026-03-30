@@ -1,0 +1,114 @@
+version: '3.9'
+
+services:
+
+  redpanda:
+    image: redpandadata/redpanda:latest
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp 1
+      - --memory 512M
+      - --reserve-memory 0M
+      - --node-id 0
+      - --check=false
+      - --kafka-addr PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr PLAINTEXT://redpanda:9092
+    ports:
+      - "9092:9092"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: feature_store
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    ports:
+      - "6380:6379"   # ✅ changed to avoid port conflict
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    ports:
+      - "5000:5000"
+    command: > 
+      mlflow server 
+      --host 0.0.0.0 
+      --port 5000
+      --gunicorn-opts "--forwarded-allow-ips=*"
+    environment:
+      - MLFLOW_FLASK_SERVER_SECRET_KEY=supersecretkey
+      - GUNICORN_CMD_ARGS=--forwarded-allow-ips=*
+    restart: unless-stopped
+
+  api:
+    build: ./services/api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+      - redpanda
+      - mlflow
+    restart: unless-stopped
+
+  producer:
+    build: ./services/producer
+    depends_on:
+      - redpanda
+    restart: unless-stopped
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: redpanda:9092
+    depends_on:
+      - redpanda
+    restart: unless-stopped
+
+  stream_processor:
+    build: ./services/stream_processor
+    depends_on:
+      - redpanda
+      - redis
+  
+  training:
+    build: ./services/training
+    depends_on:
+      - postgres
+      - mlflow
+    environment: 
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./infra/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
+volumes:
+  postgres_data:

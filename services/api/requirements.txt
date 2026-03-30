@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+psycopg2-binary
+redis
+kafka-python
+mlflow
+onnxruntime
+numpy
+feast
+prometheus-client
