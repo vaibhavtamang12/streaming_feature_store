@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "name": "UserActivity",
+  "namespace": "com.fraudstore",
+  "fields": [
+    {"name": "user_id",         "type": "string"},
+    {"name": "event_type",      "type": {"type": "enum", "name": "EventType",
+      "symbols": ["LOGIN", "LOGOUT", "PASSWORD_CHANGE", "ADDRESS_CHANGE", "FAILED_LOGIN"]}},
+    {"name": "timestamp_ms",    "type": "long"},
+    {"name": "ip_address",      "type": ["null", "string"], "default": null},
+    {"name": "session_id",      "type": ["null", "string"], "default": null}
+  ]
+}

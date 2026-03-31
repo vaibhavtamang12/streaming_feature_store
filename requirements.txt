@@ -1,0 +1,35 @@
+# Core streaming
+confluent-kafka
+fastavro
+
+# Feature store
+feast[redis]
+
+# ML
+lightgbm
+scikit-learn
+onnxmltools
+onnxconverter-common
+onnxruntime
+onnx
+
+# MLOps
+mlflow
+
+# API
+fastapi
+uvicorn[standard]
+prometheus-client
+
+# Dashboard
+streamlit
+plotly
+
+# Infra / utils
+redis
+pydantic
+pydantic-settings
+pandas
+numpy
+
+authlib

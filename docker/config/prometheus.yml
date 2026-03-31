@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: fraud_api
+    static_configs:
+      - targets: ["inference_api:8000"]
+
+  - job_name: redpanda
+    static_configs:
+      - targets: ["redpanda:9644"]    # Redpanda Prometheus port
+
+  - job_name: redis
+    static_configs:
+      - targets: ["redis:9121"]       # redis_exporter sidecar

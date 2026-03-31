@@ -1,0 +1,25 @@
+
+b
+B
+user_idUser performing the transaction"user_idJfraud_store
+ÄØ¬ÎˆÌö‘Ñõ¬ÎÀ–åÁ
+B
+"
+__dummy"
+__dummy_idJfraud_store
+ÄØ¬Î¨’ê‘Ñõ¬Î¨¾„Â1"$2e0f32f8-6e84-4fce-9e09-7258f346f1d2*Ñõ¬Îğ—€Å2­
+Œ
+transaction_statsfraud_storeuser_id"
+tx_count_10m"
+tx_count_1h"
+tx_amount_avg_1h"
+tx_amount_sum_1h"
+tx_amount_max_1h"
+distinct_merchants_1h"
+high_risk_category_flag"
+velocity_score2€£:¯event_timestampZ#!../data/transaction_stats.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢!../data/transaction_stats.parquet’ÄØ¬ÎĞÇÕŒ"ÄØ¬ÎøˆŸ‘@Jè	event_timestampŠfeast.data_source.PushSource¢transaction_stats_pushÒ{event_timestampZ#!../data/transaction_stats.parquet¢!../data/transaction_stats.parquet’ÄØ¬ÎĞÇÕŒ"ÄØ¬ÎøˆŸ‘’ÄØ¬ÎÀÛŞŒ"ÄØ¬Îèş±‘b
+user_id
+ÄØ¬Î ãÂ‘ÄØ¬Î ãÂ‘b½event_timestampZ#!../data/transaction_stats.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢!../data/transaction_stats.parquetªfraud_store’ÄØ¬ÎĞÇÕŒ"ÄØ¬ÎøˆŸ‘bö	event_timestampŠfeast.data_source.PushSource¢transaction_stats_pushªfraud_storeÒ{event_timestampZ#!../data/transaction_stats.parquet¢!../data/transaction_stats.parquet’ÄØ¬ÎĞÇÕŒ"ÄØ¬ÎøˆŸ‘’ÄØ¬ÎÀÛŞŒ"ÄØ¬Îèş±‘Š-
+
+fraud_store
+ÄØ¬Î Ø¨Ñõ¬Î¨»º
