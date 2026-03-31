@@ -66,6 +66,7 @@ class TransactionGenerator:
             )
             self.producer.poll(0)            # Non-blocking poll
             await asyncio.sleep(interval)
+        self.producer.flush()
 
 if __name__ == "__main__":
     gen = TransactionGenerator(target_tps=150)
